@@ -35,5 +35,5 @@ Ignoring these helps us find a simple model for movement, but reduces the cases 
 
 
 ###### References:
--https://pdfs.semanticscholar.org/edde/fa921e26efbbfd6c65ad1e13af0bbbc1b946.pdf
--http://planning.cs.uiuc.edu/node659.html
+- https://pdfs.semanticscholar.org/edde/fa921e26efbbfd6c65ad1e13af0bbbc1b946.pdf
+- http://planning.cs.uiuc.edu/node659.html
