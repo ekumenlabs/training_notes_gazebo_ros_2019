@@ -43,6 +43,7 @@ Then, by equaling ![xdot](http://latex.codecogs.com/gif.latex?%5Cdot%7Bx%7D) wit
 We accomplished to control the robot inputs (Wheel velocities), with a much more natural approach, which is a linear velocity, and an angular velocity. Just like we used on the technical challenge.
 
 
+*References:* http://planning.cs.uiuc.edu/node659.html, https://en.wikipedia.org/wiki/Differential_wheeled_robot, http://faculty.salina.k-state.edu/tim/robotics_sg/Control/kinematics/unicycle.html.
 
 
                              
