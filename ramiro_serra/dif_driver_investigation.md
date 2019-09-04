@@ -31,7 +31,7 @@ In the global coordinate frame, we can represent the velocity of the unicycle ro
 
 ![equation](http://faculty.salina.k-state.edu/tim/robotics_sg/_images/math/e046ca1e68836f8e625d09ea0f176463ad4c6045.png)
 
-Then, by equaling x dot with the previous *x dot*, *y dot* with the previous *y dot*, and *phi dot* with the previous *phi dot* and resolving, we get the the next equations.
+Then, by equaling ![xdot](http://latex.codecogs.com/gif.latex?%5Cdot%7Bx%7D) with the previous ![xdot](http://latex.codecogs.com/gif.latex?%5Cdot%7Bx%7D), ![ydot](http://latex.codecogs.com/gif.latex?%5Cdot%7By%7D) with the previous ![ydot](http://latex.codecogs.com/gif.latex?%5Cdot%7By%7D), and ![phidot](http://latex.codecogs.com/gif.latex?%5Cdot%7B%5Ctheta%7D) with the previous ![phidot](http://latex.codecogs.com/gif.latex?%5Cdot%7B%5Ctheta%7D) and resolving, we get the the next equations.
 
 ![equation](http://faculty.salina.k-state.edu/tim/robotics_sg/_images/math/2e3995d40e5d1670a32e4cbbfe33976197314804.png)
 
