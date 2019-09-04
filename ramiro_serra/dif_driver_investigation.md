@@ -16,4 +16,34 @@ Based on these observations, the configuration transition equation is
 
 ![\begin{displaymath}\begin{split}{\dot x}& = \frac{r}{2} (u_l + u_r) \cos \theta ...
 ...theta  {\dot \theta}& = \frac{r}{L} (u_r - u_l) . \end{split}\end{displaymath}](http://planning.cs.uiuc.edu/img5526.gif)
-The translational part contains ![ \cos \theta](http://planning.cs.uiuc.edu/img1449.gif) and ![ \sin \theta](http://planning.cs.uiuc.edu/img1450.gif) parts, just like the simple car because the differential drive moves in the direction that its drive wheels are pointing. The translation speed depends on the average of the angular wheel velocities. To see this, consider the case in which one wheel is fixed and the other rotates. This initially causes the robot to translate at '1/2' of the speed in comparison to both wheels rotating. The rotational speed ![ {\dot \theta}](http://planning.cs.uiuc.edu/img5488.gif) is proportional to the change in angular wheel speeds. The robot's rotation rate grows linearly with the wheel radius but reduces linearly with respect to the distance between the wheels.
+
+The translational part contains ![ \cos \theta](http://planning.cs.uiuc.edu/img1449.gif) and ![ \sin \theta](http://planning.cs.uiuc.edu/img1450.gif) parts, just like the simple car because the differential drive moves in the direction that its drive wheels are pointing. 
+
+The translation speed depends on the average of the angular wheel velocities. To see this, consider the case in which one wheel is fixed and the other rotates. This initially causes the robot to translate at '1/2' of the speed in comparison to both wheels rotating. The rotational speed ![ {\dot \theta}](http://planning.cs.uiuc.edu/img5488.gif) is proportional to the change in angular wheel speeds. The robot's rotation rate grows linearly with the wheel radius but reduces linearly with respect to the distance between the wheels
+
+## How to control it?
+
+#### The unicycle aproach
+
+Dealing with the displacement and velocities of the two wheels of a differential drive robot is messy. A preferred model is that of a unicycle, where we can think of the robot as having one wheel that can move with a desired velocity (V) at a specified heading Phi. Having the equations to translate between the unicycle model and our wheel velocities is what allows us to simplify the robot with the unicycle model. We have seen how to take measured wheel displacements to calculate the new robot pose. Now we do the reverse and calculate the desired wheel velocities from the unicycle model.
+
+In the global coordinate frame, we can represent the velocity of the unicycle robot as:
+
+![equation](http://faculty.salina.k-state.edu/tim/robotics_sg/_images/math/e046ca1e68836f8e625d09ea0f176463ad4c6045.png)
+
+Then, by equaling x dot with the previous *x dot*, *y dot* with the previous *y dot*, and *phi dot* with the previous *phi dot* and resolving, we get the the next equations.
+
+![equation](http://faculty.salina.k-state.edu/tim/robotics_sg/_images/math/2e3995d40e5d1670a32e4cbbfe33976197314804.png)
+
+![equation](http://faculty.salina.k-state.edu/tim/robotics_sg/_images/math/bc15602adc2e28b3b4b22539d068feee0aff81ea.png)
+
+
+### What did we accomplish?
+
+We accomplished to control the robot inputs (Wheel velocities), with a much more natural approach, which is a linear velocity, and an angular velocity. Just like we used on the technical challenge.
+
+
+
+
+                             
+                             
