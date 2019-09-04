@@ -22,14 +22,14 @@ With the wheels radius the opposite effect takes place. As the radius becomes bi
     - V_y = V_robot * sin(theta)
     - w_robot = (radius/wheels_length)*(Vr - Vl)
 
-From these equations, we can rearrange them such that we can define both wheels velocities as function of the linear and angular velocity desired for the robot. We'll want to do that because the system is moved controlling the wheel velocities, but the real parameters that we want to control are the linear and angular velocities.
+From these equations, we can rearrange them such that we can define both wheels velocities as function of the linear and angular velocity desired for the robot. We'll want to do that because the system is moved controlling the wheel velocities, but the real parameters that we want to control are the linear and angular velocities _of the robot_.
 
-- There are a few physical considerations that can introduce error to the equations described before, or can make the model for movement more complex. These simplifications are:
+- Finally, there are a few physical considerations that can introduce error to the equations described before, or can make the model for movement more complex. These simplifications are:
     - Both wheels velocities are constant when they are present. That is, there is no transient state in the velocity of the wheels. 
     - The wheels do not slip
     - The surface is flat
 
-Ignoring these helps us find a simple model for movement, but reduces the cases in which we can use the equations described. So it's important to know whether we can apply these equations or not every time we're considering using a DDR.
+Ignoring these considerations helps us find a simple model for movement, but reduces the cases in which we can use the equations described above. So it's important to know whether we can apply these equations or not every time we're considering using a DDR.
 
 
 
