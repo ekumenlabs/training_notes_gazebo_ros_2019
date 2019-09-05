@@ -33,6 +33,7 @@ With the wheels radius the opposite effect takes place. As the radius becomes bi
     - Both wheels velocities are constant when they are present. That is, there is no transient state in the velocity of the wheels. 
     - The wheels do not slip
     - The surface is flat
+    - The wheels have a fixed position, and can't move in any way except for their angular velocity. (As opposed to the case of, for example, a mecanum wheel)
 
 Ignoring these considerations helps us find a simple model for movement, but reduces the cases in which we can use the equations described above. So it's important to know whether we can apply these equations or not every time we're considering using a DDR.
 
