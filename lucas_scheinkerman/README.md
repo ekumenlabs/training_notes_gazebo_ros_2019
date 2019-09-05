@@ -25,6 +25,9 @@ With the wheels radius the opposite effect takes place. As the radius becomes bi
     - w_robot = (r/L)*(Vr - Vl)       ('L' being the distance between the wheels and 'r' the radius of the wheels)
 
 From these equations, we can rearrange them such that we can define both wheels velocities as function of the linear and angular velocity desired for the robot. We'll want to do that because the system is moved controlling the wheel velocities, but the real parameters that we want to control are the linear and angular velocities _of the robot_.
+After rearranging, the equations are:
+    - V_r = (V_robot + (L/2)w_robot)
+    - V_l = (V_robot - (L/2)w_robot)
 
 - Finally, there are a few physical considerations that can introduce error to the equations described before, or can make the model for movement more complex. These simplifications are:
     - Both wheels velocities are constant when they are present. That is, there is no transient state in the velocity of the wheels. 
