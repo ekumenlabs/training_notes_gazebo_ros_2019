@@ -25,8 +25,7 @@ With the wheels radius the opposite effect takes place. As the radius becomes bi
     - w_robot = (r/L)*(Vr - Vl)        <br>
     ('L' being the distance between the wheels, 'r' the radius of the wheels and 'theta' the angle of orientation of the robot)
 
-From these equations, we can rearrange them such that we can define both wheels velocities as function of the linear and angular velocity desired for the robot. We'll want to do that because the system is moved controlling the wheel velocities, but the real parameters that we want to control are the linear and angular velocities _of the robot_.  <br>
-After rearranging, the equations are:
+- From these equations, we can rearrange them such that we can define both wheels velocities as function of the linear and angular velocity desired for the robot. We'll want to do that because the system is moved controlling the wheel velocities, but the real parameters that we want to control are the linear and angular velocities _of the robot_. After rearranging, the equations are:
     - V_r = (V_robot + (L/2)w_robot)
     - V_l = (V_robot - (L/2)w_robot)
 
