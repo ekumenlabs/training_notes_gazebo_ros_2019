@@ -4,7 +4,7 @@ Diverse topics were given for investigating about ROS. We're going to mention th
 
 ## Listing namespaces
 
-The first assignment was to list all the namespaces that exist in the current run of ROS. This was made by listing the present nodes after executing the 'empty_house' simulation and the 'keyboard_teleop' tool. Also, additional utilities like 'awk' and 'uniq' were used for listing namespaces without repetition.
+The first assignment was to list all the namespaces that exist in the current run of ROS. This was made by listing the present nodes after executing the `create_empty_world.launch` simulation and the `keyboard_teleop` tool. Also, additional utilities like `awk` and `uniq` were used for listing namespaces without repetition.
 The result was:
 
 ```console
@@ -132,7 +132,7 @@ Subscribed topics:
 
 ## Listening to a specific topic
 
-This assignment was completed by executing the command 'rostopic echo /create1/cmd_vel', which corresponds to the topic that has information about the angular and linear velocity of the simulated robot. Simultaneously with the printing made by this command, the robot was being moved with the 'keyboard_teleop' tool. The result was:
+This assignment was completed by executing the command `rostopic echo /create1/cmd_vel`, which corresponds to the topic that has information about the angular and linear velocity of the simulated robot. Simultaneously with the printing made by this command, the robot was being moved with the `keyboard_teleop` tool. The result was:
 
 ```console
 create@galatea:/create_ws$ rostopic echo /create1/cmd_vel
@@ -146,15 +146,6 @@ angular:
   z: 0.0
 ---
 linear:
-  x: 0.0
-  y: 0.0
-  z: 0.0
-angular:
-  x: 0.0
-  y: 0.0
-  z: 0.0
----
-linear:
   x: 0.3
   y: 0.0
   z: 0.0
@@ -165,33 +156,6 @@ angular:
 ---
 linear:
   x: 0.3
-  y: 0.0
-  z: 0.0
-angular:
-  x: 0.0
-  y: 0.0
-  z: -0.8
----
-linear:
-  x: 0.0
-  y: 0.0
-  z: 0.0
-angular:
-  x: 0.0
-  y: 0.0
-  z: -0.8
----
-linear:
-  x: -0.3
-  y: 0.0
-  z: 0.0
-angular:
-  x: 0.0
-  y: 0.0
-  z: -0.8
----
-linear:
-  x: -0.3
   y: 0.0
   z: 0.0
 angular:
@@ -202,14 +166,14 @@ angular:
 
 ## Using rqt_graph with a quick comment about the 'Multi-robot setup (#76)' commit
 
-The commit mentioned in the last title added another feature to the package which allows controlling multiple robot in one simulation. This creates a bug related to the namespaces of the different robots and the 'keyboard_teleop' tool. This tool sends directly messages to the 'cmd_vel' topic, but this topic doesn't exist. The 'cmd_vel' topic that is available is '/create1/cmd_vel'
+The commit mentioned in the last title added another feature to the package which allows controlling multiple robot in one simulation. This creates a bug related to the namespaces of the different robots and the `keyboard_teleop` tool. This tool sends directly messages to the `cmd_vel` topic, but this topic doesn't exist. The `cmd_vel` topic that is available is `/create1/cmd_vel`
 This can be seen in the following image:
 
 ![rqt_graph without namespace modification](media/screen_without_ns.png)
 
-We can see that only the '/create1/' namespace exists, because there is only one robot in the simulation. Also, we can see that the 'keyboard_teleop' node is not connected to any other node, because it is publishing to a topic that no other node is subscribed to. That is, the 'keyboard_teleop' tool created a topic that has no subscribers.
+We can see that only the `/create1/` namespace exists, because there is only one robot in the simulation. Also, we can see that the `keyboard_teleop` node is not connected to any other node, because it is publishing to a topic that no other node is subscribed to. That is, the `keyboard_teleop` tool created a topic that has no subscribers.
 
-If we execute the 'keyboard_teleop' tool with the command:
+If we execute the `keyboard_teleop` tool with the command:
 
 ```console
 roslaunch ca_tools keyboard_teleop.launch __ns:=/create1/
@@ -219,4 +183,4 @@ Then the following graph is created:
 
 ![rqt_graph with namespace modification](media/screen_with_ns.png)
 
-We can see that now the 'keyboard_teleop' node is included in the '/create1/' namespace and is communicated with other nodes which are subscribed or to the '/create1/cmd_vel' topic.
+We can see that now the `keyboard_teleop'` node is included in the `/create1/` namespace and is communicated with other nodes which are subscribed or to the `/create1/cmd_vel` topic.
