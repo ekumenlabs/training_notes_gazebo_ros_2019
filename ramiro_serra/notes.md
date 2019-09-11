@@ -61,7 +61,7 @@ We can see there're 2 cmd_vel topics, let's check which one is being published o
 We can go even further and check with `rqt_graph`, let's see.
 ![teleop_unaligned](media/teleophanging.png)
 
-We can see `/key_teleop` node being hanging.
+We can see `/key_teleop` node that's not publishing on the right topic.
 
 And, we can check the namespaces, ros doesn't have a command that shows them straight up, but you can list them with `rosnode list | awk -F "/" '{print "/"$2}' | uniq`:
 
@@ -77,7 +77,7 @@ We can specify a namespace when running a script, `rosrun ca_tools key_teleop.py
 Now we can check with `rqt_graph`:
 ![teleop_aligned](media/teleopaligned.png)
 
-We can see `/create1/key_teleop` and `create1/cmd_vel` are connected now! And we can move the turtle, great!
+We can see `/create1/key_teleop` is now publishing to the correct topic, `/create1/cmd_vel` are connected now! And we can move the turtle, great!
 
 ## Let's check some topic msg types
 
