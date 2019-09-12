@@ -184,3 +184,11 @@ Then the following graph is created:
 ![rqt_graph with namespace modification](media/screen_with_ns.png)
 
 We can see that now the `keyboard_teleop'` node is included in the `/create1/` namespace and is communicated with other nodes which are subscribed or to the `/create1/cmd_vel` topic.
+
+## ROS services
+
+Services are a another type of communication between nodes which works in a slighlty different way than the publish/subscribe paradigm. The two entities that participate in the services are called __Server__ and __Client__.
+As opposed to the publish/subscribe paradigm which creates topics that exist indefinitely and which don't need a transmitter and a reciever for existing, this kind of communication is based on a request/reply exchange of messages. Once the request has been replied (which means that the service requested has been provided), the communication ends. This means it's a one-time communication.
+
+
+
