@@ -189,8 +189,113 @@ We can see that now the `keyboard_teleop'` node is included in the `/create1/` n
 
 ## ROS services
 
-Services are a another type of communication between nodes which works in a slighlty different way than the publish/subscribe paradigm. The two entities that participate in the services are called __Server__ and __Client__.
-As opposed to the publish/subscribe paradigm which creates topics that exist indefinitely and which don't need a transmitter and a reciever for existing, this kind of communication is based on a request/reply exchange of messages. Once the request has been replied (which means that the service requested has been provided), the communication ends. This means it's a one-time communication.
+Services are a another type of communication between nodes which works in a slighlty different way than the publish/subscribe paradigm. The two entities that participate in the services are called **Server** and **Client**.
+As opposed to the publish/subscribe paradigm which creates topics that exist indefinitely and which don't need a transmitter and a reciever for existing (only one of them), this kind of communication is based on a request/reply exchange of messages. Once the request has been replied (which means that the service requested has been provided), the communication ends. This means it's a one-time communication.
+In the file system level, services have their own folder in the package. In this folder you can define the reply and request data types with `.srv` files.
+__persistent connection__
 
+### Displaying and listing information about services
 
+There are two ROS command regarding services information. One of them is `rosservice`, which provides all sorts of information regarding services that are currently online. The other one is `rossrv`, which provides information about the `.srv` files.
 
+For displaying all the list of services available in a ROS session, the command `rosservice list` can be executed. Executing it in the `create_empty_world` simulation prints the following text:
+
+```console
+create@galatea:/create_ws$ rosservice list
+/create1/amcl/get_loggers
+/create1/amcl/set_logger_level
+/create1/amcl/set_parameters
+/create1/base_static_tf/get_loggers
+/create1/base_static_tf/set_logger_level
+/create1/bumper2pointcloud/get_loggers
+/create1/bumper2pointcloud/set_logger_level
+/create1/global_localization
+/create1/imu/is_calibrated
+/create1/move_base/DWAPlannerROS/set_parameters
+/create1/move_base/NavfnROS/make_plan
+/create1/move_base/clear_costmaps
+/create1/move_base/get_loggers
+/create1/move_base/global_costmap/inflation_layer/set_parameters
+/create1/move_base/global_costmap/obstacle_layer/set_parameters
+/create1/move_base/global_costmap/set_parameters
+/create1/move_base/global_costmap/static_layer/set_parameters
+/create1/move_base/local_costmap/inflation_layer/set_parameters
+/create1/move_base/local_costmap/obstacle_layer/set_parameters
+/create1/move_base/local_costmap/set_parameters
+(...)
+/gazebo/get_model_properties
+/gazebo/get_model_state
+/gazebo/get_physics_properties
+/gazebo/get_world_properties
+/gazebo/pause_physics
+/gazebo/reset_simulation
+/gazebo/reset_world
+/gazebo/set_joint_properties
+/gazebo/set_light_properties
+/gazebo/set_link_properties
+/gazebo/set_link_state
+/gazebo/set_logger_level
+/gazebo/set_model_configuration
+/gazebo/set_model_state
+/gazebo/set_parameters
+/gazebo/set_physics_properties
+/gazebo/spawn_sdf_model
+/gazebo/spawn_urdf_model
+/gazebo/unpause_physics
+/gazebo_gui/get_loggers
+/gazebo_gui/set_logger_level
+/gazebo_gui/set_parameters
+/map_server/get_loggers
+/map_server/set_logger_level
+/rosout/get_loggers
+/rosout/set_logger_level
+/static_map
+```
+
+For displaying the services that are included in a package, the command `rossrv package`can be used. For example:
+
+```console
+create@galatea:/opt/ros/kinetic/share/gazebo_msgs/srv$ rossrv package gazebo_msgs 
+gazebo_msgs/ApplyBodyWrench
+gazebo_msgs/ApplyJointEffort
+gazebo_msgs/BodyRequest
+gazebo_msgs/DeleteLight
+gazebo_msgs/DeleteModel
+gazebo_msgs/GetJointProperties
+gazebo_msgs/GetLightProperties
+gazebo_msgs/GetLinkProperties
+gazebo_msgs/GetLinkState
+gazebo_msgs/GetModelProperties
+gazebo_msgs/GetModelState
+gazebo_msgs/GetPhysicsProperties
+gazebo_msgs/GetWorldProperties
+gazebo_msgs/JointRequest
+gazebo_msgs/SetJointProperties
+gazebo_msgs/SetJointTrajectory
+gazebo_msgs/SetLightProperties
+gazebo_msgs/SetLinkProperties
+gazebo_msgs/SetLinkState
+gazebo_msgs/SetModelConfiguration
+gazebo_msgs/SetModelState
+gazebo_msgs/SetPhysicsProperties
+gazebo_msgs/SpawnModel
+create@galatea:/opt/ros/kinetic/share/gazebo_msgs/srv$ 
+```
+
+## ROS actions
+
+There can be cases where a service can take too long, so maybe in those cases the user will want to end them before they can process all the information that they need to process, or will want to see what is the state of the request. So for those cases, the actions were created.
+Similar to the services, actions have **ActionClients** which request the actions and **ActionServers** which provide the reply for the requests. As opposed to services, the communication between nodes in an action is called "ROS Action Protocol", which is a process that is delivered by ROS messages. 
+
+This process has three messages that define it:
+
+- **Goal**, which tells the ActionServer the goal to achieve with the action.
+- **Feedback**, which allows the ActionServer to tell the ActionClient about the progression of the action. It is sent periodically.
+- **Result**, which is sent by the time the action is completed.
+
+These messages are defined in a `.action` file. In addition to these, there are two more messages which can be sent when the action protocol takes place. These are:
+
+- **Cancel**, which is used to send cancel requests to the ActionServer.
+- **Status**, which is used to inform ActionClients about the current state of every goal in the system.
+
+![Action interface](media/actions_interface.png)
