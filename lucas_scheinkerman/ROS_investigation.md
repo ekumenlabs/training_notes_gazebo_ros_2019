@@ -130,6 +130,8 @@ Subscribed topics:
  /create1/laser/scan [sensor_msgs/LaserScan]
 ```
 
+As it can be seen, every message type has two fields which are separated by a forward slash character. The one before the forward slash corresponds to the package which defines the message, and the one after it corresponds to the name of the message itself.
+
 ## Listening to a specific topic
 
 This assignment was completed by executing the command `rostopic echo /create1/cmd_vel`, which corresponds to the topic that has information about the angular and linear velocity of the simulated robot. Simultaneously with the printing made by this command, the robot was being moved with the `keyboard_teleop` tool. The result was:
