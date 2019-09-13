@@ -323,3 +323,7 @@ create@galatea:/create_ws$ rostopic list | grep 'goal'
 ```
 
 As it can be seen, there is an active action in the `move_base` namespace, which has the five topics which correspond to an active action.
+
+#### Additional note
+
+Last's section printing was made with the [`Multi-robot setup (#76)`](<https://github.com/RoboticaUtnFrba/create_autonomy/commit/0e97acd69e40ef7137d0c3af3909fcafc60b3e64>) commit as the last commit. When pulled the [`AMCL improvements for presentation at UTN (#95)`](<https://github.com/RoboticaUtnFrba/create_autonomy/commit/632800507c21e0afa804c9b1385d6eb0e8c4e662>) commit, the action no longer appeared.
