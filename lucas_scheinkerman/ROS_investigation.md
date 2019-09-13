@@ -299,3 +299,27 @@ These messages are defined in a `.action` file. In addition to these, there are 
 - **Status**, which is used to inform ActionClients about the current state of every goal in the system.
 
 ![Action interface](media/actions_interface.png)
+
+### Listing actions in a ROS session
+
+Actions, as opposed to services or messages, don't have a dedicated native ROS command for listing them, such as `rosservice list`. So we can use the `grep` utility for finding active actions.
+
+The result was the following:
+
+```console
+create@galatea:/create_ws$ rostopic list | grep 'feedback'
+/create1/move_base/feedback
+create@galatea:/create_ws$ rostopic list | grep 'cancel'
+/create1/move_base/cancel
+create@galatea:/create_ws$ rostopic list | grep 'status'
+/create1/move_base/status
+create@galatea:/create_ws$ rostopic list | grep 'result'
+\/create1/move_base/result
+create@galatea:/create_ws$ rostopic list | grep 'goal'
+/create1/move_base/current_goal
+/create1/move_base/goal
+/create1/move_base_simple/goal
+/move_base_simple/goal
+```
+
+As it can be seen, there is an active action in the `move_base` namespace, which has the five topics which correspond to an active action.
