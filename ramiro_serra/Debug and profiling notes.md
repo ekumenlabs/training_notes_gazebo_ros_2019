@@ -20,16 +20,19 @@ We can edit the `send_goal.launch` file with whatever editor we feel like.
 This is how my `send_goal.launch` looked like after the changes I made.
     
     <launch>
+        <arg name="debug" default="false"/>
         <arg name="x" default="2.0"/>
         <arg name="y" default="2.0"/>
         <arg name="Y" default="1.0"/>
         <arg name="ns" default="create1"/>
+        <arg unless="$(arg debug)" name="launch_prefix" value=""/>
+        <arg if="$(arg debug)" name="launch_prefix" value="valgrind --tool=callgrind --callgrind-out-file='callgrind.sendgoal.%p'"/>
         <node pkg="ca_move_base" type="send_goal" name="navigation_goals"
-                args="$(arg x) $(arg y) $(arg Y)" ns="$(arg ns)" launch-prefix="valgrind --tool=callgrind --callgrind-out-file='callgrind.sendgoal.%p'"/>
+        args="$(arg x) $(arg y) $(arg Y)" ns="$(arg ns)" launch-prefix="$(arg launch_prefix)"/>
     </launch>
 
 Note I added some default values to the required arguments, only to make the usage of the launchfile more straight-forward.
-We can launch now the file with `roslaunch ca_move_base send_goal.launch`, we can let it run a little and then `C-c` to stop it.
+We can launch now the file with `roslaunch ca_move_base send_goal.launch debug:=true`, we can let it run a little and then `C-c` to stop it.
 Valgrind will automatically create a log located in `~/.ros/`, let's check it:
     
     cd ~/.ros/
@@ -57,17 +60,18 @@ So, we have to change the launch prefix of `send_goal` to match with the info on
 This is how my `send_goal.launch` file looks like:
 
     <launch>
+        <arg name="debug" default="false"/>
         <arg name="x" default="2.0"/>
         <arg name="y" default="2.0"/>
         <arg name="Y" default="1.0"/>
-
         <arg name="ns" default="create1"/>
-
+        <arg unless="$(arg debug)" name="launch_prefix" value=""/>
+        <arg if="$(arg debug)" name="launch_prefix" value="xterm -e gdb --args"/>
         <node pkg="ca_move_base" type="send_goal" name="navigation_goals"
-                args="$(arg x) $(arg y) $(arg Y)" ns="$(arg ns)" launch-prefix="xterm -e gdb --args"/>
+        args="$(arg x) $(arg y) $(arg Y)" ns="$(arg ns)" launch-prefix="$(arg launch_prefix)"/>
     </launch>
 
-We can launch now the file with `roslaunch ca_move_base send_goal.launch`, and a `xterm` window will popup.
+We can launch now the file with `roslaunch ca_move_base send_goal.launch debug:=true`, and a `xterm` window will popup.
 We can now use every functionality that `gdb` offers, I recommend seeing [this cheatsheet](https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf) for some useful commands.
 
 Let's see a quick example, first set a setpoint at line 10 of the file, `b 10`.
