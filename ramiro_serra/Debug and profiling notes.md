@@ -27,21 +27,24 @@ This is how my `send_goal.launch` looked like after the changes I made.
                 args="$(arg x) $(arg y) $(arg Y)" ns="$(arg ns)" launch-prefix="valgrind --tool=callgrind --callgrind-out-file='callgrind.sendgoal.%p'"/>
     </launch>
 
-Note i added some default values to the required arguments, only to make the usage of the launchfile more straight-forward.
+Note I added some default values to the required arguments, only to make the usage of the launchfile more straight-forward.
 We can launch now the file with `roslaunch ca_move_base send_goal.launch`, we can let it run a little and then `C-c` to stop it.
 Valgrind will automatically create a log located in `~/.ros/`, let's check it:
     
     cd ~/.ros/
     ls
 
-Then we can open it with `kcachegrind`, that we installed earlier
+Now to analyze the info we will use `kcachegrind`, so `vallgrind` measures the info and `kcachegrind` analyzes it.
+Then we can open it with `kcachegrind`, that we installed earlier.
+
     
     kcachegrind callgrind.sendgoal.10303
-*The appended number may very with the PID associated.*
+*The appended number may vary with the PID associated.*
 
 ![kcachegrind](media/kcachegrind.png)
 
-Now a window shows up, with a lot of info of the program, if you want to profundize more on the topic, you can see [here](http://valgrind.org/docs/), and learn how to interpret the data.
+Now a window shows up, with a lot of info of the program, if you want to deepen more on the topic, you can see [here](http://valgrind.org/docs/), and learn how to interpret the data.
+For example, the camp `Self` means the time that the program was in the function itself, and the camp `Called` measures the time that the program spent on the functions that were called inside the function.
 
 ## Debugging with gdb
 
