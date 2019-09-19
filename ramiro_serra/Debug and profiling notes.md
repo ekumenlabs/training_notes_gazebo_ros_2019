@@ -1,4 +1,5 @@
 # Debug and profiling notes
+
 The whole document is based on [this note](http://wiki.ros.org/roslaunch/Tutorials/Roslaunch%20Nodes%20in%20Valgrind%20or%20GDB), so you can check it first.
 To be able to follow the examples, install valgrind and callgrind.
 
@@ -48,6 +49,7 @@ For example, the camp `Self` means the time that the program was in the function
 
 ## Debugging with gdb
 
+To install gdb: `sudo apt-get install gdb`.
 The process is pretty similar to the previous case, but in this one, the `launch-prefix` differs a little, let's see:
 
 We have some options depending on how we want to launch gdb, in my case, I chose the *run your node in a gdb in a separate xterm window, manually type run to start it* way.
@@ -82,6 +84,30 @@ We can see the program stopped at the checkpoint we set previously.
         at /create_ws/src/create_autonomy/navigation/ca_move_base/src/send_robot_goal.cpp:10
     10      const std::string NODE_NAME = "navigation_goals";
 
+Now if we use `where full`:
+
+    #0  __static_initialization_and_destruction_0 (__initialize_p=1, 
+        __priority=65535)
+        at /create_ws/src/create_autonomy/navigation/ca_move_base/src/send_robot_goal.cpp:10
+    No locals.
+    #1  0x000000000047ef7d in _GLOBAL__sub_I_main ()
+        at /create_ws/src/create_autonomy/navigation/ca_move_base/src/send_robot_goal.cpp:48
+    No locals.
+    #2  0x00000000004b649d in __libc_csu_init ()
+    No symbol table info available.
+    #3  0x00007ffff62307bf in __libc_start_main (
+        main=0x47e426 <main(int, char**)>, argc=6, argv=0x7fffffffe168, 
+        init=0x4b6450 <__libc_csu_init>, fini=<optimized out>, 
+        rtld_fini=<optimized out>, stack_end=0x7fffffffe158)
+        at ../csu/libc-start.c:247
+            result = <optimized out>
+            unwind_buf = {cancel_jmp_buf = {{jmp_buf = {0, 0, 0, 0, 0, 0, 0, 0}, 
+                mask_was_saved = 0}}, priv = {pad = {0x0, 0x7fffffffe168, 
+                0x7fffffffe1a0, 0x7ffff7ffe168}, data = {prev = 0x0, 
+                cleanup = 0x7fffffffe168, canceltype = -7776}}}
+            not_first_call = <optimized out>
+    #4  0x000000000047e359 in _start ()
+
 We could watch a variable with `watch`, and many more features.
 
 ## Debugging a python node with pdb
@@ -113,4 +139,3 @@ Output:
     >/create_ws/src/create_autonomy/ca_tools/scripts/key_teleop.py(10)<module>()
     -> import curses
     (Pdb) 
-
