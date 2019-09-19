@@ -141,4 +141,4 @@ When running this launch file, there was a lot of output. Just as an example, he
 ==6865== ERROR SUMMARY: 5494 errors from 136 contexts (suppressed: 0 from 0)
 ```
 
-For more information about how to interpret the output of this tool, [see this](<http://valgrind.org/docs/manual/quick-start.html#quick-start.interpret>) and [page 7 of this]<https://aleksander.es/data/valgrind-memcheck.pdf>.
+For more information about how to interpret the output of this tool, [see this](<http://valgrind.org/docs/manual/quick-start.html#quick-start.interpret>) and [page 7 of this](<https://aleksander.es/data/valgrind-memcheck.pdf>).
