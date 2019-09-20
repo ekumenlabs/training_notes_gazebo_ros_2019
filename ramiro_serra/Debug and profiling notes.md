@@ -48,7 +48,7 @@ Then we can open it with `kcachegrind`, that we installed earlier.
 ![kcachegrind](media/kcachegrind.png)
 
 Now a window shows up, with a lot of info of the program, if you want to deepen more on the topic, you can see [here](http://valgrind.org/docs/), and learn how to interpret the data.
-For example, the camp `Self` means the time that the program was in the function itself, and the camp `Called` measures the time that the program spent on the functions that were called inside the function.
+For example, the field `Self` means the time that the program was in the function itself, and the field `Called` measures the time that the program spent on the functions that were called inside the function.
 
 ## Debugging with gdb
 
