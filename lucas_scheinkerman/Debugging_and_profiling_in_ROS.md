@@ -139,3 +139,18 @@ This section indicates the amount of [heap memory](<https://www.gribblelab.org/C
 - **Still reachable** bytes are those who could be freed at the end of the program (that is, those whose poinetrs are not lost), but haven't been freed.
 
 For more information about how to interpret the output of this tool, [see this](<http://valgrind.org/docs/manual/quick-start.html#quick-start.interpret>) and [page 7 of this](<https://aleksander.es/data/valgrind-memcheck.pdf>).
+
+
+## Launch structure
+
+As an example, we will show how to see the launch structure of a certain launch file using the `rqt` tool. We can install the `rqt_launchtree` plugin with the command:
+
+```console
+sudo apt-get install ros-<ROS_VERSION>-rqt-launchtree
+```
+
+After installing it, we executed the `roscore` command and then the `rqt` program. Once we enter in the `rqt` program, we have to go to Plugins --> Configuration --> Launch Tree.
+
+Here is an example of a launch structure from the `ca_tools` package:
+
+![Launch structure image](media/rqt_launchtree_example.png)
