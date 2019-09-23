@@ -143,3 +143,21 @@ Output:
     >/create_ws/src/create_autonomy/ca_tools/scripts/key_teleop.py(10)<module>()
     -> import curses
     (Pdb) 
+
+### Launch structure
+
+In order to adress last changes requested, added the `send_goal` launch structure.
+
+
+![launch_tree](media/send_goal_launch_tree.png)
+
+If you want to replicate this graph, you have to install `rqt_launchtree` first.
+
+    sudo apt-get install ros-kinetic-rqt-launchtree
+
+And then `rqt`.
+
+Then `plugins->Configurations->Launch tree`.
+Now you can pick any launchfile you like, and then inspect it as you please.
+
+We can see the graph shows the `debug` *argument* added previously.
