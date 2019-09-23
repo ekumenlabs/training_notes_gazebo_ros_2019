@@ -161,3 +161,9 @@ Then `plugins->Configurations->Launch tree`.
 Now you can pick any launchfile you like, and then inspect it as you please.
 
 We can see the graph shows the `debug` *argument* added previously.
+
+We can check a more complex launchfile, let's see `spawn_multirobot.launch`
+
+![multirobotlaunch](media/multirobot_launch_tree.png)
+
+We can see it launches several launchfiles.
