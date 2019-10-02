@@ -9,9 +9,10 @@ Let's create a new `.xacro` file.
 Then we open the `ramiro_color_sensor.xacro` file with any editor we want.
 
 We start a valid `xacro` with these first two lines of code:
-
-    <?xml version="1.0"?>
-    <robot xmlns:xacro="http://ros.org/wiki/xacro">
+```xml
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+```
 
 Then we include the files we need to our file
 
@@ -20,32 +21,34 @@ Then we include the files we need to our file
 
 And now we define a macro:
 
-    <xacro:macro name="color_sensor" params="prefix reflect parent visualize:=false">
-    
-    <xacro:property name="parent_link" value="${parent}"/>
-    <xacro:property name="color_link" value="color_link"/>
-    <xacro:property name="x" value="0.0"/>
-    <xacro:property name="y" value="0.0"/>
-    ...
+```xml
+<xacro:macro name="color_sensor" params="prefix reflect parent visualize:=false">
+<xacro:property name="parent_link" value="${parent}"/>
+<xacro:property name="color_link" value="color_link"/>
+<xacro:property name="x" value="0.0"/>
+<xacro:property name="y" value="0.0"/>
+...
+```
 
 We define some properties, they are sort of *variables*.
 
 And then we define a *link* and a *joint*:
-
-    <link name="${prefix}_color_sensor">
-         <visual>
-        <geometry>
-         <box size="${color_sensor_len} 0.02 0.02"/>
-         </geometry>
-        <origin xyz="0 0 -${color_sensor_len/2}"   rpy="0 ${0.7*(pi/2)} ${reflect}"/>
-         <material name="white"/>
-        </visual>
-    </link>
-    <joint name="base_to_${prefix}_color_sensor" type="fixed">
-        <parent link="${parent_link}"/>
-        <child link="${prefix}_color_sensor"/>
-        <origin xyz="0.18 ${reflect*(.08)} 0.15"/>
-    </joint>
+```xml
+<link name="${prefix}_color_sensor">
+     <visual>
+    <geometry>
+     <box size="${color_sensor_len} 0.02 0.02"/>
+     </geometry>
+    <origin xyz="0 0 -${color_sensor_len/2}"   rpy="0 ${0.7*(pi/2)} ${reflect}"/>
+     <material name="white"/>
+    </visual>
+</link>
+<joint name="base_to_${prefix}_color_sensor" type="fixed">
+    <parent link="${parent_link}"/>
+    <child link="${prefix}_color_sensor"/>
+    <origin xyz="0.18 ${reflect*(.08)} 0.15"/>
+</joint>
+```
 
 So let's stop here a bit.
 In the `link` tag, we got the three `tags`, each one of them is optional.
@@ -67,12 +70,13 @@ First, include the file we just created, for us to be able to use the macro we j
     <xacro:include filename="$(find ca_description)/urdf/sensors/ramiro_color_sensor.xacro"/>
 
 And then use it, 
-
-    <xacro:create_wheel prefix="left" y_offset="${wheel_separation / 2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
-    <xacro:create_wheel prefix="right" y_offset="${wheel_separation / -2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
-    <xacro:caster_wheel/>
-    <xacro:color_sensor parent="base_link" reflect="1" prefix="right"/>
-    <xacro:color_sensor parent="base_link" reflect="-1" prefix="left"/>
+```xml
+<xacro:create_wheel prefix="left" y_offset="${wheel_separation / 2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
+<xacro:create_wheel prefix="right" y_offset="${wheel_separation / -2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
+<xacro:caster_wheel/>
+<xacro:color_sensor parent="base_link" reflect="1" prefix="right"/>
+<xacro:color_sensor parent="base_link" reflect="-1" prefix="left"/>
+```
 
 We can see in the last 2 lines of code, we called 2 times the macro we created.
 They are both children of the `base_link`, we can set the `prefix` parameter to `customize` the name of the joints and links created by the macro.
@@ -84,7 +88,7 @@ Now, let's check if it's working.
 
 We can see the updated model in `gazebo`:
 
-![gazeboupdated](media/gazebo_model.png)
+![gazeboupdated](media/gazebo.png)
 
 But in `rviz`, the model is a little buggy:
 
@@ -152,15 +156,14 @@ In order to keep by the `rosREP` standard, we use the axis they suggest:
     y down
 
 So, in our `ramiro_color_sensor.xacro`, we add:
-
-    <joint name="${prefix}_color_optical_joint" type="fixed">
-      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
-      <parent link="${prefix}_color_sensor" />
-      <child link="${prefix}_color_optical_frame"/>
-    </joint>
-
-    <link name="${prefix}_color_optical_frame"/>
-
+```xml
+<joint name="${prefix}_color_optical_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
+  <parent link="${prefix}_color_sensor" />
+  <child link="${prefix}_color_optical_frame"/>
+</joint>
+<link name="${prefix}_color_optical_frame"/>
+```
 Now, `roslaunch ca_gazebo create_autorace.launch`:
 
 And we can check in `rviz`, selecting the `tf's` we want to check, that the axis are correctly placed:
